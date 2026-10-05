@@ -8,6 +8,7 @@ import {
 } from '../config';
 import { selectSharedSettings } from '../global/selectors/sharedState';
 import { callApi } from '../api/gramjs';
+import { applyBrandName } from './applyBrandName';
 import * as cacheApi from './cacheApi';
 import { createCallbackManager } from './callbacks';
 import { loadAndChangeLanguage } from './localization';
@@ -240,7 +241,7 @@ function processTranslation(
   const preferredPluralOption = typeof value === 'number' || pluralValue !== undefined
     ? getPluralOption(pluralValue ?? value)
     : 'value';
-  const template = typeof langString === 'string'
+  let template = typeof langString === 'string'
     ? langString
     : preferredPluralOption === 'value'
       // Support cached older `langString` interface
@@ -254,6 +255,8 @@ function processTranslation(
 
     return parts[parts.length - 1];
   }
+
+  template = applyBrandName(template);
 
   if (value !== undefined) {
     const formattedValue = format === 'i' ? formatInteger(value) : value;
