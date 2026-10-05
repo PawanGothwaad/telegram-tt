@@ -78,7 +78,7 @@ export default defineConfig(({ mode }): UserConfig => {
   } = env;
   const appEnv = env.APP_ENV || (mode === 'development' ? 'development' : 'production');
   const appMockedClient = env.APP_MOCKED_CLIENT || '';
-  const defaultAppTitle = `Telegram${appEnv !== 'production' ? ' Beta' : ''}`;
+  const defaultAppTitle = `Indogram${appEnv !== 'production' ? ' Beta' : ''}`;
   const baseUrl = env.BASE_URL || PRODUCTION_URL;
   const appTitle = env.APP_TITLE || defaultAppTitle;
   const isProductionApp = appEnv === 'production';
@@ -215,6 +215,7 @@ export default defineConfig(({ mode }): UserConfig => {
       host: '0.0.0.0',
       port: 1234,
       strictPort: true,
+      allowedHosts: true,
       headers: {
         'Content-Security-Policy': csp,
         'Service-Worker-Allowed': '/',

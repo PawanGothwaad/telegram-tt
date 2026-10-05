@@ -34,6 +34,7 @@ import { createCallbackManager } from '../callbacks';
 import readFallbackStrings from '../data/readFallbackStrings';
 import { initialEstablishmentPromise, isCurrentTabMaster } from '../establishMultitabRole';
 import { omit, unique } from '../iteratees';
+import { applyBrandName } from '../applyBrandName';
 import { replaceInStringsWithTeact } from '../replaceWithTeact';
 import { fastRaf } from '../schedulers';
 import { resetDateFormatCache } from './dateFormat';
@@ -384,7 +385,7 @@ function getString(langKey: LangKey, count: number) {
     ? (langPackStringValue[pluralSuffix] || langPackStringValue.other)
     : langPackStringValue;
 
-  return string;
+  return applyBrandName(string);
 }
 
 function processTranslation(
